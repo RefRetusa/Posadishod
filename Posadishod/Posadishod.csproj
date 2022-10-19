@@ -1,9 +1,19 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="../Meta.props" />
+	
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+	</PropertyGroup>
+	
+	<ItemGroup>
+	  <ProjectReference Include="..\Posadishod.Core\Posadishod.Core.csproj" />
+	  <ProjectReference Include="..\Posadishod.NiteCode\Posadishod.NiteCode.csproj" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <None Update="test.nite">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
 
 </Project>
