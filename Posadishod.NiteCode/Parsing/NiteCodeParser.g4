@@ -9,21 +9,22 @@ options {
 }
 
 mainStatement
-    : (NITECODE_USE (SEMI)?)?
-      usingStatements?
+    : (BYTE_ORDER_MARK)?
+
+      anyStatement*
+
       EOF
     ;
 
 anyStatement
-    : emptyStatement
+    : usingStatement
+    | emptyStatement
     ;
 
-emptyStatement: SEMI;
-
-usingStatements
-    : usingStatement*
+emptyStatement
+    : SEMICOLON
     ;
-    
+
 usingStatement
-    : USING Integer_Literal SEMI
+    : USING LITERAL SEMICOLON
     ;
