@@ -1,2 +1,10 @@
-﻿using a;
-using b;
+﻿using Dekoto.Engine.Math;
+using static Gogolant;
+// Single-line comment
+define type DekotoApp = Dekoto.Engine.Application;
+
+/*
+Multi-line comment
+
+(0_0) <( What? )
+*/

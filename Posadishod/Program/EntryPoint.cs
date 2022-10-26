@@ -2,6 +2,7 @@
 using Posadishod.NiteCode.Parsing;
 using System.IO;
 
+
 namespace Posadishod.Program;
 
 internal static class EntryPoint
@@ -14,7 +15,7 @@ internal static class EntryPoint
 		CommonTokenStream tokenStream = new CommonTokenStream(lexer);
 
 		NiteCodeParser parser = new(tokenStream);
-		NiteCodeParser.MainStatementContext u = parser.mainStatement();
+		NiteCodeParser.Compilation_unitContext u = parser.compilation_unit();
 
 		NiteCodeParserBaseVisitor<object> visitor = new();
 		visitor.Visit(u);
