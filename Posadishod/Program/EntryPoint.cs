@@ -1,23 +1,35 @@
 ﻿using Antlr4.Runtime;
+using Posadishod.Core;
 using Posadishod.NiteCode.Parsing;
-using System.IO;
+using NiTiS.IO;
 
 
 namespace Posadishod.Program;
 
-internal static class EntryPoint
+internal class EntryPoint : App
 {
+
 	public static void Main(string[] args)
 	{
-		AntlrInputStream stream = new(File.ReadAllText("test.nite"));
+        System.Console.WriteLine("Arguments: ");
+        foreach (string arg in args)
+        {
+            System.Console.WriteLine(arg);
+        }
 
-		NiteCodeLexer lexer = new(stream);
-		CommonTokenStream tokenStream = new CommonTokenStream(lexer);
-
-		NiteCodeParser parser = new(tokenStream);
-		NiteCodeParser.Compilation_unitContext u = parser.compilation_unit();
-
-		NiteCodeParserBaseVisitor<object> visitor = new();
-		visitor.Visit(u);
+        new EntryPoint();
 	}
+	private EntryPoint()
+	{
+        AntlrInputStream stream = new(new File("test.nite").ReadAllText());
+
+        NiteCodeLexer lexer = new(stream);
+        CommonTokenStream tokenStream = new CommonTokenStream(lexer);
+
+        NiteCodeParser parser = new(tokenStream);
+        NiteCodeParser.Compilation_unitContext u = parser.compilation_unit();
+
+        NiteCodeParserBaseVisitor<object> visitor = new();
+        visitor.Visit(u);
+    }
 }

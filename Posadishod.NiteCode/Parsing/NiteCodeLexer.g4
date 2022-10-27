@@ -18,6 +18,9 @@ ARGS: 'args';
 STATIC: 'static';
 DEFINE: 'define';
 TYPE: 'type';
+CONST: 'const';
+GLOBAL: 'global';
+NAMESPACE: 'namespace';
 
 PUBLIC: 'public';
 PRIVATE: 'private';
@@ -49,6 +52,8 @@ TYPE_PTR: 'ptr';
 TYPE_SIZE: 'size';
 
 OP_ASSIGN: '=';
+OP_PLUS: '+';
+OP_MINUS: '-';
 
 LEFT_GENERIC: '<';
 RIGHT_GENERIC: '>';
@@ -58,6 +63,12 @@ DOT: '.';
 // Rules
 IDENTIFIER: Identifier;
 WHITESPACES: (Whitespace | NewLine)+ -> channel(HIDDEN);
+NUMBER
+	: (OP_MINUS | OP_PLUS)* '0x' HexDigit+
+	| (OP_MINUS | OP_PLUS)* '0ct' OctDigit+
+	| (OP_MINUS | OP_PLUS)* '0b' BinDigit+
+	| (OP_MINUS | OP_PLUS)* DecDigit+
+	;
 
 fragment InputCharacter: ~[\r\n\u0085\u2028\u2029];
 

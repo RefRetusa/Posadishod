@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Posadishod": {
+      "commandName": "Project",
+      "commandLineArgs": "build test.nite"
+    }
+  }
+}

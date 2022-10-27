@@ -9,13 +9,24 @@ options {
 }
 
 compilation_unit
-    : header_unit? EOF
+    :
+      header_unit? EOF
+    |
+      EOF
     ;
 
 header_unit
     :
-      using_unit*
-      define_unit*
+      (
+        using_unit* define_unit*
+        |
+        define_unit* using_unit*
+      )
+      namespace_unit?
+    ;
+
+namespace_unit
+    : NAMESPACE namespace_or_type_name SEMI
     ;
 
 using_unit
@@ -24,6 +35,7 @@ using_unit
     ;
 define_unit
     : DEFINE TYPE IDENTIFIER OP_ASSIGN namespace_or_type_name SEMI
+    | DEFINE CONST IDENTIFIER OP_ASSIGN NUMBER SEMI // Replace IDENTIFIER with value
     ;
 
 namespace_or_type_name 

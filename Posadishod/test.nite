@@ -1,10 +1,10 @@
 ﻿using Dekoto.Engine.Math;
 using static Gogolant;
-// Single-line comment
 define type DekotoApp = Dekoto.Engine.Application;
+define const FIXED_SIZE = 0xFF11FFAa; // Hex
+define const __actor_to = 0; // Dec
+define const _AMALGUM = 0ct12345670; // Oct
+define const DEKOchka = -+++--+-0b0101011010; // Bin
 
-/*
-Multi-line comment
-
-(0_0) <( What? )
-*/
+// namespace Test.i32; <-- Exception i32 is a keyword
+namespace Test.Nite;
