@@ -29,7 +29,7 @@ internal class EntryPoint : App
         NiteCodeParser parser = new(tokenStream);
         NiteCodeParser.Compilation_unitContext u = parser.compilation_unit();
 
-        NiteCodeParserBaseVisitor<object> visitor = new();
+        NiteCodeBaseVisitor visitor = new();
         visitor.Visit(u);
     }
 }

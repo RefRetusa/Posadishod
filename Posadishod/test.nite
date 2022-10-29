@@ -6,5 +6,26 @@ define const __actor_to = 0; // Dec
 define const _AMALGUM = 0ct12345670; // Oct
 define const DEKOchka = -+++--+-0b0101011010; // Bin
 
-// namespace Test.i32; <-- Exception i32 is a keyword
+// namespace Test.i32; <-- Throws an Exception, i32 is a keyword
 namespace Test.Nite;
+
+public void Actor(i32 x, f32 y) 
+{
+	string defaultString = "\""; // defaultString is "
+	string verbatimString = v"\sad10943.ctor{ }  } }  } i32 as"; // verbatimString is \sad10943.ctor{ }  } }  } i32 as
+
+	Console::writeLine("Hello World");
+}
+
+private static i32 zawarudo();
+
+protected static f128 kickto(void x, void y, ptr x2);
+
+private static void retusa(void v)
+	=> retusa() + 1;
+
+// Abc<const i32 CELL_SIZE, T>
+public generic<const i32 CELL_SIZE, T> sizeof(FIXED_SIZE) struct Abc
+	where T : object;
+{
+}

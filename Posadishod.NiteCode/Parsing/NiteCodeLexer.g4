@@ -12,9 +12,14 @@ options {
 SINGLE_LINE_COMMENT: '//' InputCharacter* -> channel(COMMENTS);
 DELIMITED_COMMENT: '/*' .*? '*/' -> channel(COMMENTS);
 
+BOOL_TRUE: 'true';
+BOOL_FALSE: 'false';
+
+THIS: 'this';
+ARGS: 'args';
+THIS_G: 'THIS';
 USING: 'using';
 NAMEOF: 'nameof';
-ARGS: 'args';
 STATIC: 'static';
 DEFINE: 'define';
 TYPE: 'type';
@@ -26,12 +31,25 @@ PUBLIC: 'public';
 PRIVATE: 'private';
 PROTECTED: 'protected';
 
+DEFAULT: 'default';
+IF: 'if';
+ELSE: 'else';
+GOTO: 'goto';
+RETURN: 'return';
+
 ENUM: 'enum';
 STRUCT: 'struct';
 CLASS: 'class';
+GENERIC: 'generic';
+NONGENERIC: 'nongeneric';
+WHERE: 'where';
+
+SIZEOF: 'sizeof';
+TYPEOF: 'typeof';
 
 SEMI: ';';
 COLON: ':';
+LAMBDA: '=>';
 
 TYPE_OBJECT: 'object';
 TYPE_I8:  'i8';
@@ -51,14 +69,43 @@ TYPE_VOID: 'void';
 TYPE_PTR: 'ptr';
 TYPE_SIZE: 'size';
 
+OP_NEW: 'new';
+
+OP_U_MINUS: '--';
+OP_U_PLUS: '++';
+OP_U_NEGATE: '!';
+OP_U_BIT_NEGATE: '~';
+
+OP_BOOL_OR: '||';
+OP_BOOL_AND: '&&';
+OP_BOOL_XOR: '^^';
+
+OP_BIT_OR: '|';
+OP_BIT_AND: '&';
+OP_BIT_XOR: '^';
+
+OP_LEFT_SHIFT: '<<';
+OP_RIGHT_SHIFT: '>>';
 OP_ASSIGN: '=';
 OP_PLUS: '+';
 OP_MINUS: '-';
+OP_POW: '**';
+OP_MUL: '*';
+OP_DIV: '/';
+OP_MOD: '%';
 
 LEFT_GENERIC: '<';
 RIGHT_GENERIC: '>';
+LEFT_BRACKET: '(';
+RIGHT_BRACKET: ')';
+LEFT_SQUARE: '[';
+RIGHT_SQUARE: ']';
+LEFT_CURLY: '{';
+RIGHT_CURLY: '}';
+GETTER: '::';
 COMMA: ',';
 DOT: '.';
+QUEST: '?';
 
 // Rules
 IDENTIFIER: Identifier;
@@ -70,7 +117,42 @@ NUMBER
 	| (OP_MINUS | OP_PLUS)* DecDigit+
 	;
 
+REGULAR_STRING:                      '"'  (~["\\\r\n\u0085\u2028\u2029] | CommonCharacter)* '"';
+VERBATIUM_STRING:                    'v"' (~'"' | '""')* '"';
+
 fragment InputCharacter: ~[\r\n\u0085\u2028\u2029];
+
+fragment CommonCharacter
+	: SimpleEscapeSequence
+	| HexEscapeSequence
+	| UnicodeEscapeSequence
+	;
+
+fragment SimpleEscapeSequence
+	: '\\\''
+	| '\\"'
+	| '\\\\'
+	| '\\0'
+	| '\\a'
+	| '\\b'
+	| '\\f'
+	| '\\n'
+	| '\\r'
+	| '\\t'
+	| '\\v'
+	;
+
+fragment HexEscapeSequence
+	: '\\x' HexDigit
+	| '\\x' HexDigit HexDigit
+	| '\\x' HexDigit HexDigit HexDigit
+	| '\\x' HexDigit HexDigit HexDigit HexDigit
+	;
+
+fragment UnicodeEscapeSequence
+	: '\\u' HexDigit HexDigit HexDigit HexDigit
+	| '\\U' HexDigit HexDigit HexDigit HexDigit HexDigit HexDigit HexDigit HexDigit
+	;
 
 fragment Identifier
 	: IdentifierStartCharacter IdentifierPartCharacter*
